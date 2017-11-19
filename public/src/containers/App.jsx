@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom';
+import Router from './Router';
 
 class App extends Component {
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super();
     this.state = {};
   }
 
-
-
-  render(){
-    return(
-      <div>
-        <h1>Hey, We made it!</h1>
-      </div>
-    )
+  render() {
+    return (
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    );
   }
 };
 

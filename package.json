@@ -4,6 +4,7 @@
   "description": "One touch button for emergency response requests for any and all emergencies",
   "main": "index.js",
   "scripts": {
+    "compile": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

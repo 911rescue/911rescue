@@ -1,13 +1,50 @@
-require('babel-polyfill');
-import React, { Component } from 'react';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/es/storage';
+import reducer from './reducers';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import { Provider } from 'react-redux';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
 
+const loggerMiddleware = createLogger({});
+
+const middleware = [thunkMiddleware, loggerMiddleware]
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const configureStore = composeEnhancers(
+  applyMiddleware(...middleware),
+)(createStore);
+
+const config = {
+  key: 'root',
+  storage,
+  debug: true,
+};
+
+const combinedReducer = persistReducer(config, reducer);
+
+const createAppStore = () => {
+  let store = configureStore(combinedReducer);
+  let persistor = persistStore(store);
+
+  return { persistor, store };
+};
+
+const { persistor, store } = createAppStore();
 
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App name="App" />,
-    document.body.appendChild(document.createElement('div'))
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <App name="App" />
+      </PersistGate>
+    </Provider>,
+    document.body.appendChild(document.createElement('div')),
   )
-});
+})
