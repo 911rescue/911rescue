@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c1f29b4f8da9c0dcb0cb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8728bd78824993eb994b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -2813,10 +2813,11 @@ exports.loginUser = function (creds, history) {
 exports.signupUser = function (creds, history) {
   var body = {
     email: creds.email,
-    name: creds.name,
+    name: creds.fname + ' ' + creds.lname,
     password: creds.password,
     callbackContactNumber: creds.callbackNum
   };
+  console.log('creds info', creds);
   return function (dispatch) {
     dispatch(requestLogin(creds));
     return _axios2.default.post('api/register', body).then(function (response) {
@@ -42631,6 +42632,10 @@ var _Router = __webpack_require__(302);
 
 var _Router2 = _interopRequireDefault(_Router);
 
+var _Landing = __webpack_require__(449);
+
+var _Landing2 = _interopRequireDefault(_Landing);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42654,11 +42659,11 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        _reactRouterDom.BrowserRouter,
-        null,
-        _react2.default.createElement(_Router2.default, null)
-      );
+      return _react2.default.createElement(_Landing2.default, null)
+      // <BrowserRouter>
+      //   <Router />
+      // </BrowserRouter>
+      ;
     }
   }]);
 
@@ -45846,6 +45851,7 @@ var GuestNavBar = function GuestNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
+          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -57175,6 +57181,7 @@ var UserNavBar = function UserNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
+          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -57643,6 +57650,63 @@ var Profile = function (_Component) {
 }(_react.Component);
 
 exports.default = Profile;
+
+/***/ }),
+/* 449 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Landing = function (_Component) {
+  _inherits(Landing, _Component);
+
+  function Landing(props) {
+    _classCallCheck(this, Landing);
+
+    var _this = _possibleConstructorReturn(this, (Landing.__proto__ || Object.getPrototypeOf(Landing)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Landing, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'video',
+          { autoplay: true },
+          _react2.default.createElement('source', { src: 'https://github.com/911rescue/911rescue/media/IMG_1823.MOV' })
+        )
+      );
+    }
+  }]);
+
+  return Landing;
+}(_react.Component);
+
+exports.default = Landing;
 
 /***/ })
 /******/ ]);

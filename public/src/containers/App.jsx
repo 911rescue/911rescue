@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter } from 'react-router-dom';
 import Router from './Router';
+import Landing from './Landing';
 
 class App extends Component {
   constructor(props) {
@@ -10,9 +11,10 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <Landing />
+      // <BrowserRouter>
+      //   <Router />
+      // </BrowserRouter>
     );
   }
 };
