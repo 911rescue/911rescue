@@ -59,14 +59,21 @@ exports.loginUser = (creds, history) => {
     dispatch(requestLogin(creds));
     return axios.get(`api/login/${axiosBod}`)
       .then(response => {
-        if(!response.data){
+        if(response.data.message){
           dispatch(loginError('Bad Request...'));
           return Promise.reject(response);
         }
-        localStorage.setItem('user_token', response.data.user_token);
+        console.log("RESP FROM NODE IS: ", response.data);
+        // localStorage.setItem('user_token', response.data.user_token);
         localStorage.setItem('email', response.data.email);
-        localStorage.setItem('fullName', response.data.fullName);
-        dispatch(receiveLogin(response.data));
+        localStorage.setItem('name', response.data.name);
+        let userAttributes = Object.values(response.data).filter((element, i) => element !== null);
+        let userObject = userAttributes.reduce((acc, curr, i) => {
+          acc[i] = curr;
+          return acc;
+        }, {});
+        console.log("USER OBJECT IS: woot owot: ", userObject);
+        dispatch(receiveLogin(userObject));
         history.push('/');
       })
       .catch(err => {
@@ -93,11 +100,11 @@ exports.signupUser = (creds, history) => {
           return Promise.reject(response);
         }
 
-        console.log("OBJECT RETURNED FROM NODE IS: ", response.data.user)
-        localStorage.setItem('user_token', response.data.user_token);
+        console.log("OBJECT RETURNED FROM NODE IS: ", response.data)
+        // localStorage.setItem('user_token', response.data.user_token);
         localStorage.setItem('email', response.data.email);
-        localStorage.setItem('fullName', response.data.fullName);
-        dispatch(receiveLogin(response.data.newUser));
+        localStorage.setItem('name', response.data.name);
+        dispatch(receiveLogin(response.data));
         history.push('/');
       })
       .catch(err => {
@@ -107,9 +114,11 @@ exports.signupUser = (creds, history) => {
 };
 
 
-exports.logoutUser = () => (dispatch) => {
+exports.logoutUser = (history) => (dispatch) => {
   dispatch(requestLogout());
-  localStorage.removeItem('user_token');
+  // localStorage.removeItem('user_token');
   localStorage.removeItem('email');
+  localStorage.removeItem('name');
   dispatch(receiveLogout());
+  history.push('/');
 };

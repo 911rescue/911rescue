@@ -11,10 +11,10 @@ class App extends Component {
 
   render() {
     return (
-      <Landing />
-      // <BrowserRouter>
-      //   <Router />
-      // </BrowserRouter>
+      // <Landing />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     );
   }
 };

@@ -48,12 +48,6 @@ export default class Register extends Component {
   }
 
   handleSubmit() {
-    //concat name
-    let fullname = this.state.fname + ' ' + this.state.lname;
-    console.log('fullname: ', fullname);
-    this.setState({ name: fullname })
-    //verify password = confirmPwd
-    console.log('*** inside handleSubmit ***')
     if (this.state.password === this.state.confirmPwd) {
     //if true, signupUser
       console.log('*** request signUp ***')
@@ -64,8 +58,22 @@ export default class Register extends Component {
   }
 
   render() {
-    return (
+    return this.props.errorMessage.length < 0 ? (
       <div>
+        <form>
+          First Name:<input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />
+          Last Name:<input type='text' name='lname' onChange={(e) => {e.preventDefault(); this.handleLname(e)}} value={this.state.lname}/><br />
+          Email:<input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={this.state.email}/><br />
+          Callback Phone Number:<input type='tel' name='callback' onChange={(e) => {e.preventDefault(); this.handleCallbackNum(e)}} value={this.state.callbackNum}/><br />
+          Password:<input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={this.state.password}/><br />
+          Confirm Password:<input type='text' name='confirm-password' onChange={(e) => {e.preventDefault(); this.handleConfirmPwd(e)}} value={this.state.confirmPwd}/><br />
+          <button onClick={(e) => {e.preventDefault(); this.handleSubmit()}}>Submit</button>
+        </form>
+      </div>
+    ) :
+    (
+      <div>
+        <h1>{this.props.errorMessage}</h1>
         <form>
           First Name:<input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />
           Last Name:<input type='text' name='lname' onChange={(e) => {e.preventDefault(); this.handleLname(e)}} value={this.state.lname}/><br />

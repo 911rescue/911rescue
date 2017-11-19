@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8728bd78824993eb994b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "542c73778bfec1e6c6f3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -2799,10 +2799,19 @@ exports.loginUser = function (creds, history) {
         dispatch(loginError('Bad Request...'));
         return Promise.reject(response);
       }
-      localStorage.setItem('user_token', response.data.user_token);
+      console.log("RESP FROM NODE IS: ", response.data);
+      // localStorage.setItem('user_token', response.data.user_token);
       localStorage.setItem('email', response.data.email);
-      localStorage.setItem('fullName', response.data.fullName);
-      dispatch(receiveLogin(response.data));
+      localStorage.setItem('name', response.data.name);
+      var userAttributes = Object.values(response.data).filter(function (element, i) {
+        return element !== null;
+      });
+      var userObject = userAttributes.reduce(function (acc, curr, i) {
+        acc[i] = curr;
+        return acc;
+      }, {});
+      console.log("USER OBJECT IS: woot owot: ", userObject);
+      dispatch(receiveLogin(userObject));
       history.push('/');
     }).catch(function (err) {
       console.log('Error: ', err);
@@ -2826,11 +2835,11 @@ exports.signupUser = function (creds, history) {
         return Promise.reject(response);
       }
 
-      console.log("OBJECT RETURNED FROM NODE IS: ", response.data.user);
-      localStorage.setItem('user_token', response.data.user_token);
+      console.log("OBJECT RETURNED FROM NODE IS: ", response.data);
+      // localStorage.setItem('user_token', response.data.user_token);
       localStorage.setItem('email', response.data.email);
-      localStorage.setItem('fullName', response.data.fullName);
-      dispatch(receiveLogin(response.data.newUser));
+      localStorage.setItem('name', response.data.name);
+      dispatch(receiveLogin(response.data));
       history.push('/');
     }).catch(function (err) {
       console.log("Error: ", err);
@@ -2838,12 +2847,14 @@ exports.signupUser = function (creds, history) {
   };
 };
 
-exports.logoutUser = function () {
+exports.logoutUser = function (history) {
   return function (dispatch) {
     dispatch(requestLogout());
-    localStorage.removeItem('user_token');
+    // localStorage.removeItem('user_token');
     localStorage.removeItem('email');
+    localStorage.removeItem('name');
     dispatch(receiveLogout());
+    history.push('/');
   };
 };
 
@@ -23167,7 +23178,8 @@ var _Auth = __webpack_require__(38);
 var auth = function auth() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     isFetching: false,
-    isAuthenticated: !!localStorage.getItem('user_token')
+    isAuthenticated: !!localStorage.getItem('user_token'),
+    user: undefined
   };
   var action = arguments[1];
 
@@ -23182,7 +23194,8 @@ var auth = function auth() {
       return _extends({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        errorMessage: ''
+        errorMessage: '',
+        user: action.user
       });
     case _Auth.LOGIN_FAILURE:
       return _extends({}, state, {
@@ -23193,7 +23206,8 @@ var auth = function auth() {
     case _Auth.LOGOUT_SUCCESS:
       return _extends({}, state, {
         isFetching: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        user: undefined
       });
     default:
       return state;
@@ -42632,7 +42646,7 @@ var _Router = __webpack_require__(302);
 
 var _Router2 = _interopRequireDefault(_Router);
 
-var _Landing = __webpack_require__(449);
+var _Landing = __webpack_require__(447);
 
 var _Landing2 = _interopRequireDefault(_Landing);
 
@@ -42659,11 +42673,14 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_Landing2.default, null)
-      // <BrowserRouter>
-      //   <Router />
-      // </BrowserRouter>
-      ;
+      return (
+        // <Landing />
+        _react2.default.createElement(
+          _reactRouterDom.BrowserRouter,
+          null,
+          _react2.default.createElement(_Router2.default, null)
+        )
+      );
     }
   }]);
 
@@ -45674,14 +45691,6 @@ var _SecureProperties = __webpack_require__(446);
 
 var _SecureProperties2 = _interopRequireDefault(_SecureProperties);
 
-var _Logout = __webpack_require__(447);
-
-var _Logout2 = _interopRequireDefault(_Logout);
-
-var _Profile = __webpack_require__(448);
-
-var _Profile2 = _interopRequireDefault(_Profile);
-
 var _Auth = __webpack_require__(38);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -45691,6 +45700,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import Profile from './Profile';
+
 
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
@@ -45707,23 +45718,19 @@ var Router = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Router.__proto__ || Object.getPrototypeOf(Router)).call(this, props));
 
     _this.state = {};
-    _this.logoutUser = _this.logoutUser.bind(_this);
     return _this;
   }
 
   _createClass(Router, [{
-    key: 'logoutUser',
-    value: function logoutUser() {
-      this.props.dispatch((0, _Auth.logoutUser)());
-    }
-  }, {
     key: 'render',
     value: function render() {
+      console.log("props are: ", this.props);
       var _props = this.props,
           dispatch = _props.dispatch,
           errorMessage = _props.errorMessage,
           isAuthenticated = _props.isAuthenticated,
-          history = _props.history;
+          history = _props.history,
+          user = _props.user;
 
       return isAuthenticated === false ? _react2.default.createElement(
         _reactRouterDom.Switch,
@@ -45775,25 +45782,17 @@ var Router = function (_Component) {
               dispatch: dispatch,
               errorMessage: errorMessage,
               isAuthenticated: isAuthenticated,
-              history: history
+              history: history,
+              user: user
             }),
             _react2.default.createElement(_SecureProperties2.default, {
               dispatch: dispatch,
               errorMessage: errorMessage,
               isAuthenticated: isAuthenticated,
-              history: history
+              history: history,
+              user: user
             })
           )
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.Route,
-          { exact: true, path: '/logout' },
-          _react2.default.createElement(_Logout2.default, {
-            dispatch: dispatch,
-            errorMessage: errorMessage,
-            isAuthenticated: isAuthenticated,
-            history: history
-          })
         )
       );
     }
@@ -45807,11 +45806,13 @@ var Router = function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   var auth = state.auth;
   var isAuthenticated = auth.isAuthenticated,
-      errorMessage = auth.errorMessage;
+      errorMessage = auth.errorMessage,
+      user = auth.user;
 
   return {
     isAuthenticated: isAuthenticated,
-    errorMessage: errorMessage
+    errorMessage: errorMessage,
+    user: user
   };
 };
 
@@ -45851,7 +45852,7 @@ var GuestNavBar = function GuestNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
-          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/media/call911.jpg', alt: '' }),
+          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/tree/master/media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -57166,6 +57167,8 @@ var _reactBootstrap = __webpack_require__(81);
 
 var _reactRouterDom = __webpack_require__(53);
 
+var _Auth = __webpack_require__(38);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UserNavBar = function UserNavBar(props) {
@@ -57181,7 +57184,7 @@ var UserNavBar = function UserNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
-          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/media/call911.jpg', alt: '' }),
+          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/tree/master/media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -57197,7 +57200,9 @@ var UserNavBar = function UserNavBar(props) {
           null,
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/logout' },
+            { to: '/', onClick: function onClick() {
+                return props.dispatch((0, _Auth.logoutUser)(props.history));
+              } },
             'Logout'
           )
         )
@@ -57266,16 +57271,47 @@ var Login = function (_Component) {
   }, {
     key: 'LoginUser',
     value: function LoginUser() {
-      this.props.dispatch((0, _Auth.loginUser)(this.state, this.props.history));
+      if (this.state.email.length > 6 && this.state.password.length > 6) {
+        this.props.dispatch((0, _Auth.loginUser)(this.state, this.props.history));
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement(
+      return this.props.errorMessage.length < 0 ? _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'form',
+          null,
+          'Email:',
+          _react2.default.createElement('input', { type: 'email', name: 'email', onChange: function onChange(e) {
+              e.preventDefault();_this2.handleEmail(e);
+            }, value: this.state.email }),
+          _react2.default.createElement('br', null),
+          'Password:',
+          _react2.default.createElement('input', { type: 'text', name: 'password', onChange: function onChange(e) {
+              e.preventDefault();_this2.handlePassword(e);
+            }, value: this.state.password }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            { onClick: function onClick(e) {
+                e.preventDefault();_this2.LoginUser();
+              } },
+            'Submit'
+          )
+        )
+      ) : _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          this.props.errorMesage
+        ),
         _react2.default.createElement(
           'form',
           null,
@@ -57393,12 +57429,6 @@ var Register = function (_Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit() {
-      //concat name
-      var fullname = this.state.fname + ' ' + this.state.lname;
-      console.log('fullname: ', fullname);
-      this.setState({ name: fullname });
-      //verify password = confirmPwd
-      console.log('*** inside handleSubmit ***');
       if (this.state.password === this.state.confirmPwd) {
         //if true, signupUser
         console.log('*** request signUp ***');
@@ -57412,9 +57442,58 @@ var Register = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement(
+      return this.props.errorMessage.length < 0 ? _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(
+          'form',
+          null,
+          'First Name:',
+          _react2.default.createElement('input', { type: 'text', name: 'fname', onChange: function onChange(e) {
+              e.preventDefault();_this2.handleFname(e);
+            }, value: this.state.fname }),
+          _react2.default.createElement('br', null),
+          'Last Name:',
+          _react2.default.createElement('input', { type: 'text', name: 'lname', onChange: function onChange(e) {
+              e.preventDefault();_this2.handleLname(e);
+            }, value: this.state.lname }),
+          _react2.default.createElement('br', null),
+          'Email:',
+          _react2.default.createElement('input', { type: 'email', name: 'email', onChange: function onChange(e) {
+              e.preventDefault();_this2.handleEmail(e);
+            }, value: this.state.email }),
+          _react2.default.createElement('br', null),
+          'Callback Phone Number:',
+          _react2.default.createElement('input', { type: 'tel', name: 'callback', onChange: function onChange(e) {
+              e.preventDefault();_this2.handleCallbackNum(e);
+            }, value: this.state.callbackNum }),
+          _react2.default.createElement('br', null),
+          'Password:',
+          _react2.default.createElement('input', { type: 'text', name: 'password', onChange: function onChange(e) {
+              e.preventDefault();_this2.handlePassword(e);
+            }, value: this.state.password }),
+          _react2.default.createElement('br', null),
+          'Confirm Password:',
+          _react2.default.createElement('input', { type: 'text', name: 'confirm-password', onChange: function onChange(e) {
+              e.preventDefault();_this2.handleConfirmPwd(e);
+            }, value: this.state.confirmPwd }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            { onClick: function onClick(e) {
+                e.preventDefault();_this2.handleSubmit();
+              } },
+            'Submit'
+          )
+        )
+      ) : _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          this.props.errorMessage
+        ),
         _react2.default.createElement(
           'form',
           null,
@@ -57511,6 +57590,11 @@ var SecureProperties = function (_Component) {
         'div',
         null,
         _react2.default.createElement(
+          'h1',
+          null,
+          this.props.user.fname
+        ),
+        _react2.default.createElement(
           _reactBootstrap.DropdownButton,
           { title: 'Add Property', id: 'addProp' },
           _react2.default.createElement(
@@ -57535,124 +57619,6 @@ exports.default = SecureProperties;
 
 /***/ }),
 /* 447 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Auth = __webpack_require__(38);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Logout = function Logout(props) {
-  props.dispatch((0, _Auth.logoutUser)());
-  return _react2.default.createElement('div', null);
-};
-
-exports.default = Logout;
-
-/***/ }),
-/* 448 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Profile = function (_Component) {
-  _inherits(Profile, _Component);
-
-  function Profile(props) {
-    _classCallCheck(this, Profile);
-
-    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
-
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(Profile, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          null,
-          _react2.default.createElement(
-            'input',
-            { type: 'text', name: 'height' },
-            'Height'
-          ),
-          _react2.default.createElement(
-            'input',
-            { type: 'text', name: 'weight' },
-            'Weight'
-          ),
-          _react2.default.createElement(
-            'input',
-            { type: 'text', name: 'race' },
-            'Race'
-          ),
-          _react2.default.createElement(
-            'input',
-            { type: 'text', name: 'hairColor' },
-            'Hair Color'
-          ),
-          _react2.default.createElement(
-            'input',
-            { type: 'text', name: 'eyeColor' },
-            'Eye Color'
-          ),
-          'DropDown of ID Types',
-          _react2.default.createElement('br', null),
-          'Corresponding ID Field',
-          _react2.default.createElement('br', null),
-          'List of Emergency Contact',
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'button',
-            null,
-            'Add Contact'
-          )
-        )
-      );
-    }
-  }]);
-
-  return Profile;
-}(_react.Component);
-
-exports.default = Profile;
-
-/***/ }),
-/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57694,10 +57660,11 @@ var Landing = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
+        'Render Video',
         _react2.default.createElement(
           'video',
-          { autoplay: true },
-          _react2.default.createElement('source', { src: 'https://github.com/911rescue/911rescue/media/IMG_1823.MOV' })
+          { autoPlay: true },
+          _react2.default.createElement('source', { src: 'https://github.com/911rescue/911rescue/tree/master/media/introVideo.mov', alt: 'video goes here' })
         )
       );
     }
