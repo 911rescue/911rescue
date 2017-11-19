@@ -48,7 +48,12 @@ const signUp = (req, res) => {
 };
 
 const listSecureProp = (req, res) => {
-  User.findAll({ where: {email: req.params.email}})
+  User.findAll({ where: {email: req.params.email}}).then((data) => {
+    console.log('data retrieved', data)
+    if (data) {
+      // list available props
+    }
+  })
 
 };
 

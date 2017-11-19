@@ -7,6 +7,7 @@ import Login from './Login';
 import Register from './Register';
 import SecureProperties from './SecureProperties';
 import Logout from '../components/Logout';
+import Profile from './Profile';
 import { logoutUser } from '../actions/Auth';
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
@@ -67,6 +68,12 @@ class Router extends Component {
               isAuthenticated={isAuthenticated}
               history={history}
             />
+            {/* <Profile 
+              dispatch={dispatch}
+              errorMessage={errorMessage}
+              isAuthenticated={isAuthenticated}
+              history={history}
+            /> */}
             <SecureProperties 
               dispatch={dispatch}
               errorMessage={errorMessage}

@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9459217d9e80892e7982"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c1f29b4f8da9c0dcb0cb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -45673,6 +45673,10 @@ var _Logout = __webpack_require__(447);
 
 var _Logout2 = _interopRequireDefault(_Logout);
 
+var _Profile = __webpack_require__(448);
+
+var _Profile2 = _interopRequireDefault(_Profile);
+
 var _Auth = __webpack_require__(38);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -57547,6 +57551,98 @@ var Logout = function Logout(props) {
 };
 
 exports.default = Logout;
+
+/***/ }),
+/* 448 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Profile = function (_Component) {
+  _inherits(Profile, _Component);
+
+  function Profile(props) {
+    _classCallCheck(this, Profile);
+
+    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Profile, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement(
+            'input',
+            { type: 'text', name: 'height' },
+            'Height'
+          ),
+          _react2.default.createElement(
+            'input',
+            { type: 'text', name: 'weight' },
+            'Weight'
+          ),
+          _react2.default.createElement(
+            'input',
+            { type: 'text', name: 'race' },
+            'Race'
+          ),
+          _react2.default.createElement(
+            'input',
+            { type: 'text', name: 'hairColor' },
+            'Hair Color'
+          ),
+          _react2.default.createElement(
+            'input',
+            { type: 'text', name: 'eyeColor' },
+            'Eye Color'
+          ),
+          'DropDown of ID Types',
+          _react2.default.createElement('br', null),
+          'Corresponding ID Field',
+          _react2.default.createElement('br', null),
+          'List of Emergency Contact',
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            null,
+            'Add Contact'
+          )
+        )
+      );
+    }
+  }]);
+
+  return Profile;
+}(_react.Component);
+
+exports.default = Profile;
 
 /***/ })
 /******/ ]);
