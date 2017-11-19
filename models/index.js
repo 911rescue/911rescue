@@ -186,7 +186,7 @@ User.sync({force: true})
   .then(() => Fatal.sync({force: true}))
   .then(() => Theft.sync({force: true}))
   .then(() => Concern.sync({force: true}))
-  .then(() => console.log("successfully connected to database, despite"))
+  .then(() => console.log("successfully connected to database"))
   .catch((err) => console.log("error connecting to database", err));
 
 module.exports = { User, Location, Home, Vehicle, Emergency, Fatal, Theft, Concern };

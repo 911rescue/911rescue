@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import GuestNavBar from '../components/GuestNavBar';
+import UserNavBar from '../components/UserNavBar';
+import Login from './Login';
+import Register from './Register';
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
 // import FrontPageGuest from './FrontPage/FrontPageGuest';
@@ -9,7 +13,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 class Router extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {};
   }
 
@@ -20,15 +24,41 @@ class Router extends Component {
       <Switch>
         <Route exact path="/">
           <div>
-            <h1>AYOOOOO</h1>
+            <GuestNavBar
+              dispatch={dispatch}
+              errorMessage={errorMessage}
+              isAuthenticated={isAuthenticated}
+              history={history}
+            />
           </div>
+        </Route>
+        <Route exact path="/login">
+          <Login
+            dispatch={dispatch}
+            errorMessage={errorMessage}
+            isAuthenticated={isAuthenticated}
+            history={history}
+          />
+        </Route>
+        <Route exact path="/register">
+          <Register
+            dispatch={dispatch}
+            errorMessage={errorMessage}
+            isAuthenticated={isAuthenticated}
+            history={history}
+          />          
         </Route>
       </Switch>
     ) : (
       <Switch>
         <Route exact path="/">
           <div>
-            <h1>Yoooo Hi</h1>
+            <UserNavBar 
+              dispatch={dispatch}
+              errorMessage={errorMessage}
+              isAuthenticated={isAuthenticated}
+              history={history}
+            />
           </div>
         </Route>
       </Switch>
