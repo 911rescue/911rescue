@@ -79,12 +79,13 @@ exports.loginUser = (creds, history) => {
 exports.signupUser = (creds, history) => {
   const body = {
     email: creds.email,
-    fullName: creds.fullName,
-    password: creds.password
+    name: creds.name,
+    password: creds.password,
+    callbackContactNumber: creds.callbackNum
   };
   return (dispatch) => {
     dispatch(requestLogin(creds));
-    return axios.post('api/signup', body)
+    return axios.post('api/register', body)
       .then(response => {
         if (response.statusText !== 'Created') {
           dispatch(loginError('Bad Request...'));

@@ -5,6 +5,8 @@ import GuestNavBar from '../components/GuestNavBar';
 import UserNavBar from '../components/UserNavBar';
 import Login from './Login';
 import Register from './Register';
+import SecureProperties from './SecureProperties';
+import { logoutUser } from '../actions/Auth';
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
 // import FrontPageGuest from './FrontPage/FrontPageGuest';
@@ -15,6 +17,11 @@ class Router extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.logoutUser=this.logoutUser.bind(this);
+  }
+
+  logoutUser() {
+    this.props.dispatch(logoutUser())  
   }
 
 
@@ -65,6 +72,7 @@ class Router extends Component {
               isAuthenticated={isAuthenticated}
               history={history}
             />
+            <button onClick= {(e) => { e.preventDefault(); this.logoutUser() }}>Logout</button>
           </div>
         </Route>
 

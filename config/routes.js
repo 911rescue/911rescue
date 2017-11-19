@@ -1,9 +1,9 @@
 let router = require('express').Router();
-let usersController = require('./controller/userController');
+let userController = require('./controller/userController');
 
-router.get('/login', usersController.login);
+router.get('/login', userController.login);
 
-router.post('/register', usersController.signUp);
+router.post('/register', userController.signUp);
 
 
 
