@@ -59,8 +59,15 @@ class Router extends Component {
               isAuthenticated={isAuthenticated}
               history={history}
             />
+            <SecureProperties 
+              dispatch={dispatch}
+              errorMessage={errorMessage}
+              isAuthenticated={isAuthenticated}
+              history={history}
+            />
           </div>
         </Route>
+
       </Switch>
     )
   }

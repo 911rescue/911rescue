@@ -8,27 +8,27 @@ let User = db.define('user', {
   },
   height: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   weight: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   eyeColor: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   hairColor: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   emergencyContactNames: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
-    allowNull: false
+    allowNull: true
   },
   emergencyContactNumbers: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
-    allowNull: false
+    allowNull: true
   },
   callbackContactNumber: {
     type: Sequelize.TEXT,
@@ -53,6 +53,14 @@ let User = db.define('user', {
   governmentIdentificationCard: {
     type: Sequelize.TEXT,
     allowNull: true
+  },
+  email: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  password: {
+    type: Sequelize.TEXT,
+    allowNull: false
   }
 });
 

@@ -17,6 +17,7 @@ export default class Register extends Component {
           Email:<input type='email' name='email' /><br />
           Password:<input type='text' name='password' /><br />
           Confirm Password:<input type='text' name='confirm-password' /><br />
+          <button>Submit</button>
         </form>
       </div>
     )

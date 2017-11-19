@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e98f1b3a273ce8f8cfa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9d126a19c4d92529e859"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -57176,12 +57176,17 @@ var Login = function (_Component) {
         _react2.default.createElement(
           'form',
           null,
-          'User Name:',
-          _react2.default.createElement('input', { type: 'text', name: 'userName' }),
+          'Email:',
+          _react2.default.createElement('input', { type: 'email', name: 'email' }),
           _react2.default.createElement('br', null),
           'Password:',
           _react2.default.createElement('input', { type: 'text', name: 'password' }),
-          _react2.default.createElement('br', null)
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            null,
+            'Submit'
+          )
         )
       );
     }
@@ -57253,7 +57258,12 @@ var Register = function (_Component) {
           _react2.default.createElement('br', null),
           'Confirm Password:',
           _react2.default.createElement('input', { type: 'text', name: 'confirm-password' }),
-          _react2.default.createElement('br', null)
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'button',
+            null,
+            'Submit'
+          )
         )
       );
     }

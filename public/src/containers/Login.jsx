@@ -12,8 +12,9 @@ export default class Login extends Component {
     return (
       <div>
         <form>
-          User Name:<input type='text' name='userName' /><br />
+          Email:<input type='email' name='email' /><br />
           Password:<input type='text' name='password' /><br />
+          <button>Submit</button>
         </form>
       </div>
     )
