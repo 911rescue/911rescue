@@ -6,7 +6,7 @@ const saltRounds = 10;
 const User = require('../../models/index').User;
 
 const login = (req, res) => {
-  User.findOne({where: {name: req.params.name }}).then((user) => {
+  User.findOne({where: {email: req.params.email }}).then((user) => {
     if(user){
       bcrypt.compare(req.params.password, user.password, (err, data) => {
         if(data){
@@ -27,9 +27,9 @@ const login = (req, res) => {
 const signUp = (req, res) => {
   bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(req.body.password, salt, (err, hash) => {
-      User.findOne({where: {name: req.body.name }}).then((person) => {
+      User.findOne({where: {email: req.body.email }}).then((person) => {
         if(person){
-          console.log('That username is taken. Please try another name.');
+          console.log('That email is taken. Please use another email address.');
           res.status(404).send(err);
         } else {
           User.create({
@@ -45,6 +45,11 @@ const signUp = (req, res) => {
       });
     });
   });
+};
+
+const listSecureProp = (req, res) => {
+  User.findAll({ where: {email: req.params.email}})
+
 };
 
 module.exports = {

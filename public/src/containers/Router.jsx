@@ -6,6 +6,7 @@ import UserNavBar from '../components/UserNavBar';
 import Login from './Login';
 import Register from './Register';
 import SecureProperties from './SecureProperties';
+import Logout from '../components/Logout';
 import { logoutUser } from '../actions/Auth';
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
@@ -72,10 +73,16 @@ class Router extends Component {
               isAuthenticated={isAuthenticated}
               history={history}
             />
-            <button onClick= {(e) => { e.preventDefault(); this.logoutUser() }}>Logout</button>
           </div>
         </Route>
-
+        <Route exact path ="/logout">
+          <Logout 
+            dispatch={dispatch}
+            errorMessage={errorMessage}
+            isAuthenticated={isAuthenticated}
+            history={history}
+          />
+        </Route>
       </Switch>
     )
   }
