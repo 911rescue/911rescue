@@ -1,5 +1,5 @@
 let router = require('express').Router();
-let usersController = require('../server/controller/userController');
+let usersController = require('./controller/userController');
 
 router.get('/login', usersController.login);
 

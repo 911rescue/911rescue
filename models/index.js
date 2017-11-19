@@ -33,7 +33,7 @@ let User = db.define('user', {
   callbackContactNumber: {
     type: Sequelize.TEXT,
     allowNull: false
-  },
+  },  
   latitude: {
     type: Sequelize.DECIMAL(10, 6),
     allowNull: true

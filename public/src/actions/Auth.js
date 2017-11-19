@@ -90,10 +90,12 @@ exports.signupUser = (creds, history) => {
           dispatch(loginError('Bad Request...'));
           return Promise.reject(response);
         }
+
+        console.log("OBJECT RETURNED FROM NODE IS: ", response.data.user)
         localStorage.setItem('user_token', response.data.user_token);
         localStorage.setItem('email', response.data.email);
         localStorage.setItem('fullName', response.data.fullName);
-        dispatch(receiveLogin(response.data));
+        dispatch(receiveLogin(response.data.newUser));
         history.push('/');
       })
       .catch(err => {

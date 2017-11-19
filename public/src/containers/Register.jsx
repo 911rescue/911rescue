@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import { signUpUser } from '../actions/Auth';
 
 export default class Register extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      confirmPwd: ''     
+    }
 
   }
 
