@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c1f29b4f8da9c0dcb0cb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4e560061fee6c476da41"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -2813,10 +2813,11 @@ exports.loginUser = function (creds, history) {
 exports.signupUser = function (creds, history) {
   var body = {
     email: creds.email,
-    name: creds.name,
+    name: creds.fname + ' ' + creds.lname,
     password: creds.password,
     callbackContactNumber: creds.callbackNum
   };
+  console.log('creds info', creds);
   return function (dispatch) {
     dispatch(requestLogin(creds));
     return _axios2.default.post('api/register', body).then(function (response) {
@@ -45846,6 +45847,7 @@ var GuestNavBar = function GuestNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
+          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -57175,6 +57177,7 @@ var UserNavBar = function UserNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
+          _react2.default.createElement('img', { src: 'https://github.com/911rescue/911rescue/media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },

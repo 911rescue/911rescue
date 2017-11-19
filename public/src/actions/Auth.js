@@ -79,10 +79,11 @@ exports.loginUser = (creds, history) => {
 exports.signupUser = (creds, history) => {
   const body = {
     email: creds.email,
-    name: creds.name,
+    name: creds.fname + ' ' + creds.lname,
     password: creds.password,
     callbackContactNumber: creds.callbackNum
   };
+  console.log('creds info', creds);
   return (dispatch) => {
     dispatch(requestLogin(creds));
     return axios.post('api/register', body)
