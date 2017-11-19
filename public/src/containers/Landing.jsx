@@ -9,8 +9,8 @@ export default class Landing extends Component {
   render(){
     return(
       <div>Render Video
-        <video autoplay>
-          <source src='https://github.com/911rescue/911rescue/media/landingVideo.mov' />
+        <video autoPlay>
+          <source src='https://github.com/911rescue/911rescue/tree/master/media/introVideo.mov' alt='video goes here'/>
         </video>
       </div>
 

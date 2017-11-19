@@ -3,6 +3,7 @@ import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from '../
 const auth = (state = {
   isFetching: false,
   isAuthenticated: !!localStorage.getItem('user_token'),
+  user: undefined
 }, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -18,6 +19,7 @@ const auth = (state = {
         isFetching: false,
         isAuthenticated: true,
         errorMessage: '',
+        user: action.user,
       };
     case LOGIN_FAILURE:
       return {
@@ -31,6 +33,7 @@ const auth = (state = {
         ...state,
         isFetching: true,
         isAuthenticated: false,
+        user: undefined,
       };
     default:
       return state;

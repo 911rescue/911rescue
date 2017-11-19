@@ -6,8 +6,7 @@ import UserNavBar from '../components/UserNavBar';
 import Login from './Login';
 import Register from './Register';
 import SecureProperties from './SecureProperties';
-import Logout from '../components/Logout';
-import Profile from './Profile';
+// import Profile from './Profile';
 import { logoutUser } from '../actions/Auth';
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
@@ -19,16 +18,12 @@ class Router extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.logoutUser=this.logoutUser.bind(this);
-  }
-
-  logoutUser() {
-    this.props.dispatch(logoutUser())  
   }
 
 
   render() {
-    const { dispatch, errorMessage, isAuthenticated, history } = this.props;
+    console.log("props are: ", this.props);
+    const { dispatch, errorMessage, isAuthenticated, history, user } = this.props;
     return isAuthenticated === false ? (
       <Switch>
         <Route exact path="/">
@@ -67,6 +62,7 @@ class Router extends Component {
               errorMessage={errorMessage}
               isAuthenticated={isAuthenticated}
               history={history}
+              user={user}
             />
             {/* <Profile 
               dispatch={dispatch}
@@ -79,16 +75,9 @@ class Router extends Component {
               errorMessage={errorMessage}
               isAuthenticated={isAuthenticated}
               history={history}
+              user={user}
             />
           </div>
-        </Route>
-        <Route exact path ="/logout">
-          <Logout 
-            dispatch={dispatch}
-            errorMessage={errorMessage}
-            isAuthenticated={isAuthenticated}
-            history={history}
-          />
         </Route>
       </Switch>
     )
@@ -98,10 +87,11 @@ class Router extends Component {
 
 const mapStateToProps = (state) => {
   const { auth } = state;
-  const { isAuthenticated, errorMessage } = auth;
+  const { isAuthenticated, errorMessage, user } = auth;
   return {
     isAuthenticated,
-    errorMessage
+    errorMessage,
+    user
   };
 };
 
