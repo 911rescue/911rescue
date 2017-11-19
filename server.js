@@ -8,6 +8,9 @@ let routes = require("./config/routes");
 let app = express();
 let server = require('http').Server(app);
 
+let db = require('./config/database');
+let { User, Location, Home, Vehicle, Emergency, Fatal, Theft, Concern } = require('./models/index.js');
+
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));

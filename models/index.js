@@ -41,7 +41,7 @@ let User = db.define('user', {
   longitude: {
     type: Sequelize.DECIMAL(10, 6),
     allowNull: true
-  }
+  },
   passportNumber: {
     type: Sequelize.TEXT,
     allowNull: true
@@ -55,7 +55,6 @@ let User = db.define('user', {
     allowNull: true
   }
 });
-
 
 let Location = db.define('location', {
   latitude: {
@@ -89,7 +88,7 @@ let Home = db.define('home', {
 });
 
 
-let Vehichle = db.define('vehichle', {
+let Vehicle = db.define('vehicle', {
   licensePlate: {
     type: Sequelize.TEXT,
     allowNull: false
@@ -162,18 +161,32 @@ let Concern = db.define('concern', {
   }
 });
 
+User.hasMany(Emergency, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
+Emergency.belongsTo(User, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
 
+Location.hasMany(Home, { foreignKey: 'location_id', allowNull: false, onDelete: 'CASCADE' });
+Home.belongsTo(Location, { foreignKey: 'location_id', allowNull: false, onDelete: 'CASCADE' });
+Location.hasMany(Vehicle, { foreignKey: 'location_id', allowNull: false, onDelete: 'CASCADE' });
+Vehicle.belongsTo(Location, { foreignKey: 'location_id', allowNull: false, onDelete: 'CASCADE' });
 
+Emergency.hasMany(Fatal, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
+Fatal.belongsTo(Emergency, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
 
-// User.sync({force: true})
-//   .then(() => Location.sync({force: true}))
-//   .then(() => Home.sync({force: true}))
-//   .then(() => Vehichle.sync({force: true}))
-//   .then(() => Emergency.sync({force: true}))
-//   .then(() => Fatal.sync({force: true}))
-//   .then(() => Theft.sync({force: true}))
-//   .then(() => Concern.sync({force: true}))
-//   .then(() => console.log("SHIT FUCKING WORKS MOTHER FUCKER!! ;)"))
-//   .catch((err) => console.log("YOU ARE CHOKING ON A FAT DICK FIX IT BRO!!!!"));
+Emergency.hasMany(Theft, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
+Theft.belongsTo(Emergency, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
 
+Emergency.hasMany(Concern, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
+Concern.belongsTo(Emergency, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
 
+User.sync({force: true})
+  .then(() => Location.sync({force: true}))
+  .then(() => Home.sync({force: true}))
+  .then(() => Vehicle.sync({force: true}))
+  .then(() => Emergency.sync({force: true}))
+  .then(() => Fatal.sync({force: true}))
+  .then(() => Theft.sync({force: true}))
+  .then(() => Concern.sync({force: true}))
+  .then(() => console.log("successfully connected to database, despite"))
+  .catch((err) => console.log("error connecting to database", err));
+
+module.exports = { User, Location, Home, Vehicle, Emergency, Fatal, Theft, Concern };
