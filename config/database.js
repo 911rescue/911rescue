@@ -12,7 +12,7 @@ if(process.env.DATABASE_URL){
 } else {
   db = new Sequelize('rescue911', 'root', '', {
     host: 'localhost',
-    dialect: 'psql'
+    dialect: 'postgres'
   });
   console.log('connected to db locally');
 }
