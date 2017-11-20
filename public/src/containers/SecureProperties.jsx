@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
+import Landing from './Landing';
 
 export default class SecureProperties extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class SecureProperties extends Component {
     return(
       <div>
         <h1>{this.props.user.name}</h1>
+        <Landing />
         <DropdownButton title='Add Property' id='addProp'>
           <MenuItem eventKey='1'>Add Home/Residence</MenuItem>
           <MenuItem eventKey='2'>Add Vehicle</MenuItem>
@@ -28,7 +30,7 @@ export default class SecureProperties extends Component {
         <br/>
 
         <div>
-          <button onClick={(e) => {e.preventDefault(); }}>HELP</button>
+          <button onClick={(e) => {e.preventDefault(); this.requestEmergencyResponders()}}>HELP</button>
         </div>
       </div>
     )

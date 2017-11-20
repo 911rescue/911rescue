@@ -1,0 +1,8 @@
+.embed-responsive-item {
+  display: block;
+  position: relative;
+  top: 25px;
+  width: 800px;
+  height: 400px;
+  margin: 0 auto;
+}

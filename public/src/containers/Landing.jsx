@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactPlayer from 'react-player';
 
 export default class Landing extends Component {
   constructor(props) {
@@ -8,10 +9,8 @@ export default class Landing extends Component {
 
   render(){
     return(
-      <div>Render Video
-        <video autoPlay>
-          <source src='https://github.com/911rescue/911rescue/tree/master/media/introVideo.mov' alt='video goes here'/>
-        </video>
+      <div>
+        <iframe className='embed-responsive-item' src={'https://www.youtube.com/embed/mUSEAty85vw'} allowFullScreen />
       </div>
 
     )
