@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import Landing from './Landing';
+import axios from 'axios';
 
 export default class SecureProperties extends Component {
   constructor(props) {
@@ -10,7 +11,12 @@ export default class SecureProperties extends Component {
   }
 
   requestEmergencyResponders(){
-    axios.post('/emergency', {user: this.props.user})
+    let myPhone = window.btoa(JSON.stringify({
+      params: {
+        phoneNumber: '+19173010220'
+      }
+    }));
+    axios.get(`/api/emergency/${myPhone}`)
       .then(response => {
         console.log("RESPONSE IS: ", response.data);
       })
