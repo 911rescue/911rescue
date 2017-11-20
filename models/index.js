@@ -186,15 +186,15 @@ Theft.belongsTo(Emergency, { foreignKey: 'emergenciable_id', allowNull: false, o
 Emergency.hasMany(Concern, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
 Concern.belongsTo(Emergency, { foreignKey: 'emergenciable_id', allowNull: false, onDelete: 'CASCADE' });
 
-User.sync({force: true})
-  .then(() => Location.sync({force: true}))
-  .then(() => Home.sync({force: true}))
-  .then(() => Vehicle.sync({force: true}))
-  .then(() => Emergency.sync({force: true}))
-  .then(() => Fatal.sync({force: true}))
-  .then(() => Theft.sync({force: true}))
-  .then(() => Concern.sync({force: true}))
-  .then(() => console.log("successfully connected to database"))
-  .catch((err) => console.log("error connecting to database", err));
+// User.sync({force: true})
+//   .then(() => Location.sync({force: true}))
+//   .then(() => Home.sync({force: true}))
+//   .then(() => Vehicle.sync({force: true}))
+//   .then(() => Emergency.sync({force: true}))
+//   .then(() => Fatal.sync({force: true}))
+//   .then(() => Theft.sync({force: true}))
+//   .then(() => Concern.sync({force: true}))
+//   .then(() => console.log("successfully connected to database"))
+//   .catch((err) => console.log("error connecting to database", err));
 
 module.exports = { User, Location, Home, Vehicle, Emergency, Fatal, Theft, Concern };
