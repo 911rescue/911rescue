@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "39d8256f8d8260016395"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5f7a8ac636fefc5b29f3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -13730,7 +13730,7 @@ var Landing = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement('iframe', { className: 'embed-responsive-item', src: 'https://www.youtube.com/embed/mUSEAty85vw', allowFullScreen: true })
+        _react2.default.createElement(_reactPlayer2.default, { url: 'https://www.youtube.com/watch?v=mUSEAty85vw&feature=youtu.be', playing: true })
       );
     }
   }]);
@@ -46769,7 +46769,7 @@ var GuestNavBar = function GuestNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
-          _react2.default.createElement('img', { src: '../../media/call911.jpg', alt: '' }),
+          _react2.default.createElement('img', { src: '../../../media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },
@@ -58101,7 +58101,7 @@ var UserNavBar = function UserNavBar(props) {
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
-          _react2.default.createElement('img', { src: '../../media/call911.jpg', alt: '' }),
+          _react2.default.createElement('img', { src: '../../../media/call911.jpg', alt: '' }),
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/' },

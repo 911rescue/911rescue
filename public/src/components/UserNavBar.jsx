@@ -8,7 +8,7 @@ const UserNavBar = (props) => (
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <img src='../../media/call911.jpg' alt=''/>
+          <img src='../../../media/call911.jpg' alt=''/>
           <Link to="/">911Rescue</Link>
         </Navbar.Brand>
       </Navbar.Header>

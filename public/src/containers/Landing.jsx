@@ -10,13 +10,9 @@ export default class Landing extends Component {
   render(){
     return(
       <div>
-        <iframe className='embed-responsive-item' src={'https://www.youtube.com/embed/mUSEAty85vw'} allowFullScreen />
+        <ReactPlayer url='https://www.youtube.com/watch?v=mUSEAty85vw&feature=youtu.be' playing/>
       </div>
 
     )
   }
-
-
-
-  
 }
