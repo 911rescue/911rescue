@@ -12,7 +12,7 @@ const sendTexts = (req, res) => {
 
   let buff = new Buffer(req.params.phoneNumber, 'base64');  
   let text = JSON.parse(buff.toString('ascii'));
-  console.log('data is: ', text)
+  console.log('data is: ', text);
   client.messages.create({
     to: text.params.phoneNumber,
     from: process.env.TWILIO_NUMBER,
