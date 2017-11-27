@@ -19,7 +19,7 @@ const login = (req, res) => {
           console.log("User Logged In: ", user);
           res.status(200).send(user);
         } else {
-          console.log('Invalid Login woooo Credentials');
+          console.log('Invalid Login Credentials');
           res.send({message: 'Invalid Login Credentials'});
         }
       });

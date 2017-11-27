@@ -8,6 +8,7 @@ import Register from './Register';
 import SecureProperties from './SecureProperties';
 // import Profile from './Profile';
 import { logoutUser } from '../actions/Auth';
+import Landing from './Landing';
 // import Signup from './Logging/Signup';
 // import FrontPageUser from './FrontPage/FrontPageUser';
 // import FrontPageGuest from './FrontPage/FrontPageGuest';
@@ -34,6 +35,7 @@ class Router extends Component {
               isAuthenticated={isAuthenticated}
               history={history}
             />
+            <Landing />
           </div>
         </Route>
         <Route exact path="/login">
@@ -86,6 +88,7 @@ class Router extends Component {
 
 
 const mapStateToProps = (state) => {
+  console.log('state to map: ', state);
   const { auth } = state;
   const { isAuthenticated, errorMessage, user } = auth;
   return {

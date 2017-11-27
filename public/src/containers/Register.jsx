@@ -58,7 +58,7 @@ export default class Register extends Component {
   }
 
   render() {
-    return this.props.errorMessage.length < 0 ? (
+    return (!this.props.errorMessage || this.props.errorMessage.length < 0) ? (
       <div>
         <form>
           First Name:<input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />

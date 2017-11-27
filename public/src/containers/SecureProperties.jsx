@@ -27,7 +27,6 @@ export default class SecureProperties extends Component {
     return(
       <div>
         <h1>{this.props.user.name}</h1>
-        <Landing />
         <DropdownButton title='Add Property' id='addProp'>
           <MenuItem eventKey='1'>Add Home/Residence</MenuItem>
           <MenuItem eventKey='2'>Add Vehicle</MenuItem>

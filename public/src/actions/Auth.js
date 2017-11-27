@@ -72,7 +72,7 @@ exports.loginUser = (creds, history) => {
           acc[i] = curr;
           return acc;
         }, {});
-        console.log("USER OBJECT IS: woot owot: ", userObject);
+        console.log("USER OBJECT IS: ", userObject);
         dispatch(receiveLogin(userObject));
         history.push('/');
       })

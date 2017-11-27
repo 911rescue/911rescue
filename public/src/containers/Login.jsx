@@ -29,7 +29,8 @@ export default class Login extends Component {
   }
 
   render() {
-    return this.props.errorMessage.length < 0 ? (
+    console.log('props', this.props);
+    return (!this.props.errorMessage || this.props.errorMessage.length < 0) ? (
       <div>
         <form>
           Email:<input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={ this.state.email }/><br />
