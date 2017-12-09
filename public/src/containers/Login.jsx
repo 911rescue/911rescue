@@ -32,19 +32,21 @@ export default class Login extends Component {
     console.log('props', this.props);
     return (!this.props.errorMessage || this.props.errorMessage.length < 0) ? (
       <div>
+        <h2>User Log-In</h2>
         <form>
-          Email:<input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={ this.state.email }/><br />
-          Password:<input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={ this.state.password }/><br />
+          <label class='login'>Email:</label><input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={ this.state.email }/><br />
+          <label class='login'>Password:</label><input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={ this.state.password }/><br />
           <button onClick={(e) => {e.preventDefault(); this.LoginUser() }}>Submit</button>
         </form>
       </div>
     ) :
     (
-      <div>
+      <div>        
         <h1>{this.props.errorMesage}</h1>
+        <h2>User Log-In</h2>
         <form>
-          Email:<input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={ this.state.email }/><br />
-          Password:<input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={ this.state.password }/><br />
+          <label class='login'>Email:</label><input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={ this.state.email }/><br />
+          <label class='login'>Password:</label><input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={ this.state.password }/><br />
           <button onClick={(e) => {e.preventDefault(); this.LoginUser() }}>Submit</button>
         </form>
       </div>

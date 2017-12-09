@@ -60,13 +60,14 @@ export default class Register extends Component {
   render() {
     return (!this.props.errorMessage || this.props.errorMessage.length < 0) ? (
       <div>
+        <h2>New User Registration</h2>
         <form>
-          First Name:<input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />
-          Last Name:<input type='text' name='lname' onChange={(e) => {e.preventDefault(); this.handleLname(e)}} value={this.state.lname}/><br />
-          Email:<input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={this.state.email}/><br />
-          Callback Phone Number:<input type='tel' name='callback' onChange={(e) => {e.preventDefault(); this.handleCallbackNum(e)}} value={this.state.callbackNum}/><br />
-          Password:<input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={this.state.password}/><br />
-          Confirm Password:<input type='text' name='confirm-password' onChange={(e) => {e.preventDefault(); this.handleConfirmPwd(e)}} value={this.state.confirmPwd}/><br />
+          <label class='register'>First Name:</label><input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />
+          <label class='register'>Last Name:</label><input type='text' name='lname' onChange={(e) => {e.preventDefault(); this.handleLname(e)}} value={this.state.lname}/><br />
+          <label class='register'>Email:</label><input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={this.state.email}/><br />
+          <label class='register'>Callback Phone Number:</label><input type='tel' name='callback' onChange={(e) => {e.preventDefault(); this.handleCallbackNum(e)}} value={this.state.callbackNum}/><br />
+          <label class='register'>Password:</label><input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={this.state.password}/><br />
+          <label class='register'>Confirm Password:</label><input type='text' name='confirm-password' onChange={(e) => {e.preventDefault(); this.handleConfirmPwd(e)}} value={this.state.confirmPwd}/><br />
           <button onClick={(e) => {e.preventDefault(); this.handleSubmit()}}>Submit</button>
         </form>
       </div>
@@ -74,13 +75,14 @@ export default class Register extends Component {
     (
       <div>
         <h1>{this.props.errorMessage}</h1>
+        <h2>New User Registration</h2>
         <form>
-          First Name:<input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />
-          Last Name:<input type='text' name='lname' onChange={(e) => {e.preventDefault(); this.handleLname(e)}} value={this.state.lname}/><br />
-          Email:<input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={this.state.email}/><br />
-          Callback Phone Number:<input type='tel' name='callback' onChange={(e) => {e.preventDefault(); this.handleCallbackNum(e)}} value={this.state.callbackNum}/><br />
-          Password:<input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={this.state.password}/><br />
-          Confirm Password:<input type='text' name='confirm-password' onChange={(e) => {e.preventDefault(); this.handleConfirmPwd(e)}} value={this.state.confirmPwd}/><br />
+          <label class='register'>First Name:</label><input type='text' name='fname' onChange={(e) => {e.preventDefault(); this.handleFname(e)}} value={this.state.fname}/><br />
+          <label class='register'>Last Name:</label><input type='text' name='lname' onChange={(e) => {e.preventDefault(); this.handleLname(e)}} value={this.state.lname}/><br />
+          <label class='register'>Email:</label><input type='email' name='email' onChange={(e) => {e.preventDefault(); this.handleEmail(e)}} value={this.state.email}/><br />
+          <label class='register'>Callback Phone Number:</label><input type='tel' name='callback' onChange={(e) => {e.preventDefault(); this.handleCallbackNum(e)}} value={this.state.callbackNum}/><br />
+          <label class='register'>Password:</label><input type='text' name='password' onChange={(e) => {e.preventDefault(); this.handlePassword(e)}} value={this.state.password}/><br />
+          <label class='register'>Confirm Password:</label><input type='text' name='confirm-password' onChange={(e) => {e.preventDefault(); this.handleConfirmPwd(e)}} value={this.state.confirmPwd}/><br />
           <button onClick={(e) => {e.preventDefault(); this.handleSubmit()}}>Submit</button>
         </form>
       </div>

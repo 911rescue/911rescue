@@ -43,3 +43,13 @@ h1 {
 .learnMore {
   color: yellowgreen;
 }
+
+.register {
+  display: inline-block;
+  width: 12.5em;
+}
+
+.login {
+  display: inline-block;
+  width: 6.25em;
+}
