@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { logoutUser } from '../actions/Auth'; 
 
 const UserNavBar = (props) => (
-  <div>
-    <Navbar>
+  <div className='titleBar'>
+    <Navbar >
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="/">

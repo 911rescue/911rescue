@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fff930ef25a536b9cb9c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4354ddf3020d6254b9bf"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -7133,7 +7133,7 @@ var Landing = function (_Component) {
           ),
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/', 'class': 'learnMore' },
+            { to: '/', className: 'learnMore' },
             'Learn More'
           )
         )
@@ -45935,7 +45935,7 @@ var GuestNavBar = function GuestNavBar(props) {
   console.log('in GuestNavBar, props are:', props);
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'titleBar' },
     _react2.default.createElement(
       _reactBootstrap.Navbar,
       null,
@@ -57265,7 +57265,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var UserNavBar = function UserNavBar(props) {
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'titleBar' },
     _react2.default.createElement(
       _reactBootstrap.Navbar,
       null,

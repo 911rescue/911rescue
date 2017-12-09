@@ -53,3 +53,7 @@ h1 {
   display: inline-block;
   width: 6.25em;
 }
+
+.titleBar {
+  max-width: 100%;
+}

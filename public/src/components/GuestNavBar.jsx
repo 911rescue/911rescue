@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const GuestNavBar = (props) => {
 console.log('in GuestNavBar, props are:', props);
 return (
-  <div>
+  <div className='titleBar'>
     <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
